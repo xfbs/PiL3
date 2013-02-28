@@ -1,0 +1,14 @@
+Example 4.2: Describe four different ways to write an unconditional loop in
+Lua. Which one do you prefer?
+
+I prefer the while loop because it instantly shows what you are trying to do:
+loop until the conditional `true` becomes false, and it never will, so the
+loop will go on forever. 
+The version with repeat-until is also quite readable, but since the condition
+is at the bottom, one can't immediately see that it's an unconditional loop if
+the loop's body is big.
+The for loop is not very readable, because the reader would wonder what
+`math.huge` is, or why we would loop that many times
+The goto loop is not very good either because there might be programmers that
+don't know about gotos and labels, so they will be confused by it, and while
+it works, it doesn't immediately suggest that it's an infinite loop.
