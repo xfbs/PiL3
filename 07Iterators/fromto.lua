@@ -7,7 +7,7 @@ function fromto(min, max)
     -- iterator function, the max variable is 
     -- stored by the for loop and automagically
     -- passed to it on every invocation
-    function iter(max, current)
+    local function iter(max, current)
         -- increase the current value
         current = current + 1
 
@@ -37,7 +37,7 @@ function sfromto(min, max)
     local current = min - 1
 
     -- the iterator function
-    function iter()
+    local function iter()
         -- increment the state variable
         current = current + 1
         
