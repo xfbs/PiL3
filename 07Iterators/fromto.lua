@@ -12,7 +12,7 @@ function fromto(min, max)
         current = current + 1
 
         -- if we've not reached max yet, return
-        -- current valie
+        -- current value
         if not (current > max) then
             return current
         else
