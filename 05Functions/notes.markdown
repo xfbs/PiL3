@@ -1,5 +1,5 @@
-Notes for Chapter 5: Functions
-==============================
+Chapter 5: Functions
+====================
 
 - If a function has one single argument and that argument is either a string
   literal or a table constructor, the parentheses (in a function call) are
@@ -9,7 +9,7 @@ Notes for Chapter 5: Functions
 - You can call a function with a number of arguments different from it's
   number of parameters: extra arguments are thrown away, missing ones filled
   with nil
-- Functions in Lua can return multiple results
+- Functions in Lua can return *multiple results*
 - In some cases, like when the function is placed in parentheses (like so:
   `(f())`) or when it's used as an expression, only the first result is used
 - The Lua function `table.unpack()` takes an array as input and returns the
@@ -17,8 +17,8 @@ Notes for Chapter 5: Functions
 - The opposite can be done with the function `table.pack()`, which turns all
   of it's parameter into an array and stores the size of that array in the
   field `n`
-- Lua functions can take a variable amount of inputs with the vararg
-  expression (`...`), which are used in place of the parameter list and expand
+- Lua functions can take a variable amount of inputs with the *vararg
+  expression* (`...`), which is used in place of the parameter list and expands
   to the given arguments in the function body
-- Named parameters can be simulated in Lua by passing a table as the first and
+- *Named parameters* can be simulated in Lua by passing a table as the first and
   only argument, which can look like this: `func{arg1="this", arg2="that"}`

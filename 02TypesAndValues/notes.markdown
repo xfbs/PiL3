@@ -1,5 +1,5 @@
-Notes to Chapter 2: Types and Values
-====================================
+Chapter 2: Types and Values
+===========================
 
 - Lua has eight basic types: `nil`, `boolean`, `number`, `string`, `userdata`,
   `function`, `thread` and `table`
@@ -7,9 +7,9 @@ Notes to Chapter 2: Types and Values
   returns a string representing the type of the given variable
 - Functions are *first-class values* in Lua, they can be used like any other
   type of variables
-- Lua uses `nil` as a kind of *non-value*, representing the absence of a useful
+- Lua uses `nil` as a kind of non-value, representing the absence of a useful
   value
-- All numbers in Lua are *real* (double) *floating-point numbers* (there is no
+- **All** numbers in Lua are real (double) *floating-point numbers* (there is no
   integer type)
 - In the Lua number type, any integer up to 2^53 has an exact representation
 - Due to using a double type, there can be **rounding errors**: `12.7-20+7.3` is not

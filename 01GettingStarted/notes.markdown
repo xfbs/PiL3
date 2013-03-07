@@ -1,5 +1,5 @@
-Notes to Chapter 1: Getting Started
-===================================
+Chapter 1: Getting Started
+==========================
 
 - Each piece of code that Lua executes is called a *chunk*
 - Lua needs no seperator between consecutive statements (but you can use a
