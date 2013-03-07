@@ -1,7 +1,7 @@
 Notes to Chapter 1: Getting Started
 ===================================
 
-- Each piece of code that Lua executes is called a chunk
+- Each piece of code that Lua executes is called a *chunk*
 - Lua needs no seperator between consecutive statements (but you can use a
   semicolon if you wish)
 - To exit the interpreter, use `os.exit()`
