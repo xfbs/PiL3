@@ -26,7 +26,7 @@ Chapter 8: Compilation, Execution and Errors
   anywhere normal code would be allowed as well
 - Code can be precompiled with the `luac` program
 - `string.dump` returns the precompiled code (as a string) of any Lua function
-- **Maliciously corrupted binary code can crash the Lua interpreter of even
+- **Maliciously corrupted binary code can crash the Lua interpreter or even
   execute user-provided machine code!**
 - As a second parameter, `load` can accept a name of the chunk to be loaded
   for debugging purposes
