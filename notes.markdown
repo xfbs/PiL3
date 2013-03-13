@@ -297,3 +297,200 @@ Chapter 9: Coroutines
 - The non-preemptive multitasking that they offer can be used to concurrently
   download files from the internet if *non-blocking sockets* are available
 
+Chapter 10: Complete Examples
+=============================
+
+- The *eight-queen puzzle* is solved with a configuration of **eight**
+  queens on a chessboard in a way that no queen can attack another
+  one
+- Any valid solution must have exactly **one** queen in each row
+- No two queens can be in the same column
+- No two queens can be directly diagonal to each other
+- A *Markov-chain algorithm* can be used to generate pseudo-random
+  text based on what words can follow a sequence of n previous words
+  in a base text
+- The resulting text is very, but not quite, random
+
+Chapter 11: Data Structures
+===========================
+
+- Tables in Lua are *the* data structure
+- all other data structures can be implemented quite efficiently
+  on top of Lua tables
+- **Arrays** in Lua are implemented by simply indexing tables with
+  integers
+- They can grow as needed, elements that aren't used (equal to `nil`)
+  don't take up space
+- Indexing commonly starts at 1, but it can start at any other value
+- **Matrices and multi-dimensional arrays** can be represented in
+  two ways in Lua
+- **Two-dimensional arrays** can be implemented with tables, they can
+  be used to represent matrices
+- They allow for the most freedom (they can, for example, represent
+  triangular matrices)
+- **Flat arrays** can also be used to represent matrices
+- These can have an integer index that is composed of the two
+  matrix indexes
+- Otherwise, they can have a string index which is the concatenation
+  of the two matrix indexes
+- Either way, they can both easily represent matrices and are also
+  efficient when working with *sparse matrices*: only matrix elements
+  that are not `nil` take up memory
+- One thing to note is that keys in tables have not intrinsic order,
+  so iterations with `pairs()` happen in no particular order
+- Linked lists are particularly easy to implement in Lua: they are
+  simply a list with a reference to the next list
+- Linked lists aren't used very often since they are not really
+  neccessary
+- **Queues** and **double queues** can be implemented easily with
+  tables that have a first and last index variables
+- The first and last variables will continually increase when
+  using the queues, but the available `~2^53` bit of integer
+  precision are unlikely to run out
+- **Sets** and **bags** can be represented by storing them as the
+  *key* of a table
+- **Sets** can either exist (then `set[name]==true`) or not
+  (then `set[name]==nil`), which is achieved by using the name
+  as indices of a table (and setting the corresponding value to
+  `true`)
+- **Bags**, also called **multisets** are like **sets**, 
+  but there can be duplicates
+- This is again trivial to implement with tables, where 
+  `bag[name]` is either `nil` (then `name` isn't in `bag`)
+  or a number describing how many times `name` is in `bag`
+- **String buffers** are sometimes needed in Lua since strings
+  are immutable
+- To read a file chunk by chunk, all the chunks can first be 
+  stored in a table and then finally put together with
+  `table.concat`, which optionally takes a string to use as
+  seperator
+- File should, however, rather be read with io.read("\*a")
+
+Chapter 12: Data Files and Persistence
+======================================
+
+- **Problem**: writing data to file is easier than reading it
+  back (since then it needs to be *parsed*)
+- Coding robust input routines is always difficult
+- Lua started out as a data description language
+- BibTeX was one of the inspirations for the constructor
+  syntax in Lua
+- We can use plain Lua to store data, which will look like
+  this:
+    Person{
+        name = "John Doe",
+        age = 35,
+        email = "john@example.com",
+    }
+- `Person` both describes the data and represents a Lua
+  function call, so we only have to define Person as a
+  sensible callback function and run the data file
+- This is a *self-describing data format*, which means that
+  it's easy to read and edit by hand
+- Lua runs fast enough to store data like this, since data
+  description has been one of the main applications of it
+- To be able to write data which needs to be read back, it
+  needs to be put in a known state, this process is called
+  *serialization*
+- We can do this recursively in Lua
+- Floating-point numbers may loose precision when written
+  and read back in decimal form, but we can use a hexadecimal
+  format when writing: `string.format("%a", 0.4342)`
+- Strings can also be properly escaped: `string.format("%q", str)`
+- Tables can be serialized recursively **only** if they
+  do not have *cycles* (some parts of the table refer to
+  other parts of the same table)
+- To represent cycled tables, named tables are needed
+
+Chapter 13: Metatables and Metamethods
+======================================
+
+- *Metatables* allow us to change the behavior of a value when
+  confronted with an undefined operation
+- Whenever Lua tried to perform arithmetic operations on tables,
+  it checks if any of them have a *metamethod* which defines this
+  operation and runs it, else it raises an error
+- Tables and userdata have individual metatables, all other data
+  types share one single metatable for all values of that type
+- Lua always creates new tables without metatables
+- We can use `setmetatable(tab, metatab)` to set or change
+  the metatable of any type
+- Any table can be the metatable of any value
+- A group of related tables can share a common metatable which
+  describes their common behavior
+- A table can be it's own metatable so that it describes
+  it's own behavior
+- Arithmetic metamethods are as follows:
+
+`__add`
+:   addition (`+`)
+
+`__mul`
+:   multiplication (`*`)
+
+`__sub`
+:   subtraction (`-`)
+
+`__div`
+:   division (`/`)
+
+`__unm`
+:   negation (`not`)
+
+`__mod`
+:   modulus (`%`)
+
+`__pow`
+:   exponentiation (`^`)
+
+`__concat`
+:   concatenation (`..`)
+
+- When two tables are in an undefined expression, the left
+  table's metamethod will be used if it exists, else the
+  right table's metamethod will be used, and if that doesn't
+  exist either, an error will be raised
+- Metatables can also be used for *relational operators*:
+
+`__eq`
+:   equality (`==`)
+
+`__lt`
+:   less than comparison (`<`)
+
+`__le`
+:   less than or equal (`<=`)
+
+- Equality comparison doesn't work if objects have different
+  types (always returns `false`)
+- Some library functions also use metamethods to change their
+  behaviour:
+
+`__tostring`
+:   Used by `tostring()` to convert the table to a string
+
+`__metatable`
+:   Returned by `getmetatable()` if it exists, and subsequent
+    to setting this, `setmetatable()` will raise an error
+    (as this marks the table as protected)
+
+- The behaviour of tables can also be changed with
+  metatables:
+
+`__index`
+:   Called when a nonexisting index of the table it accessed.
+    Can be either a metamethod (function) or a table, the latter
+    is useful for using this to implement inheritance. Otherwise,
+    it can also be used to change the default value of an empty
+    table. This metamethod can be bypassed by using the `rawget()`
+    function.
+
+`__newindex`
+:   Called when a new table index is defined. This can be bypassed
+    by using the `rawset()` function.
+
+- The table access metamethods allow us to write a table that
+  has no data of it's own but simply proxies all access to another
+  table, for example to track access or to block certain kinds of
+  access (eg. *read-only*)
+
