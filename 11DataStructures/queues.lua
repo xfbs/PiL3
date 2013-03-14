@@ -77,3 +77,22 @@ function queue.poplast(list)
 
     return value
 end
+
+-- example
+q = queue.new()
+q:pushfirst("example")
+q:pushfirst("an")
+q:pushfirst("is")
+q:pushfirst("This")
+q:pushlast("of")
+q:pushlast("queues")
+
+word = q:popfirst()
+while word do
+    io.write(word .. " ")
+    word = q:popfirst()
+end
+
+io.write("\n")
+print("q.first="..q.first)
+print("q.last="..q.last)
