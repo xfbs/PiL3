@@ -12,6 +12,6 @@ Chapter 1: Getting Started
 - Comments start with a double hypen (`--`) and go to the rest of the line
 - Long comments start with a `--[[` and end with `]]`
 - Global variables do not need declarations, they are `nil` by default
-- In interactive mode, prepending and equals sign (`=`) to any expression prints
+- In interactive mode, prepending an equals sign (`=`) to any expression prints
   the result of that expression
 - Any arguments to a script are in the global variable `arg` by default

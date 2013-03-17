@@ -17,11 +17,11 @@ Chapter 14: The Environment
 - In a metamethod, `debug.getinfo(2, "S")` returns a table whose
   field `what` tells whether the function that called it is
   a main chunk, a regular Lua function or a C function
-- In Lua, global variables do not need to be truly global
+- In Lua, global variables do not need to be truly global (eg.
+  the could be *nonlocal*)
 - A *free name* is a name that is not bound to an explicit
   declaration, that is, it does not occur inside the scope of
   a local variable with that name
-- A free name does not refer to a global variable
 - The Lua compiler translates any free name `var` to `_ENV.var`
 - This new `_ENV` variable is **not** a global variable
 - Lua compiles any chunk in the presence of a predefined
@@ -44,6 +44,6 @@ Chapter 14: The Environment
   external code
 - We can also use `debug.setupvalue()` to change the upvalue
   for a compiled function
-- When the function is the result of `load` or `loadfile`, 
+- When the function is the result of `load()` or `loadfile()`, 
   Lua ensures that it has only one upvalue and that this
   upvalue is `_ENV`

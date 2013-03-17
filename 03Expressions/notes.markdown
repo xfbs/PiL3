@@ -21,9 +21,17 @@ Chapter 3: Expressions
   the length of the sequence represented by it, a sequence being a table where
   numeric keys go from 1 to n without any holes (embedded nils)
 - Tables can be constructed by a few different constructors:
-  1. **List constructor**, which constructs the table to be a sequence, looks like
-     this: `{324, "value two", true, ...}`
-  2. **Record constructor**, which constructs the table to be a record, looks like
-     this: `{fieldone=10, fieldtwo="value two", fieldthree=false, ...}`
-  3. **General constructor**, which can construct any kind of table, and it looks
-     like this: `{["field one"]=324, ["field two"]="value two", ...}`
+
+    **List constructor**
+    :   constructs the table to be a sequence, has no notion of keys and looks 
+        like this: `{324, "value two", true, ...}`
+
+    **Record constructor**
+    :   constructs the table to be a record, has keys which must be valid Lua
+        identifiers and looks like this: `{fieldone=10, fieldtwo="value two", 
+        fieldthree=false, ...}`
+
+    **General constructor**
+    :   can construct any kind of table, it's keys do not need to be valid 
+        identifiers and can in fact be of any type, it looks
+        like this: `{["field one"]=324, ["field two"]="value two", ...}`
