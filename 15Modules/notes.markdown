@@ -25,3 +25,9 @@ Chapter 15: Modules and Packages
 - Writing a module is simple: create a table with all the functions
   that should be exported in it and return it
 - We can use some `_ENV` tricks to automatically build the table
+- Lua also supports *submodules*, their names are formed with 
+  dots: `module.submodule`
+- To find submodules, Lua translates the name of the submodule
+  into a path, like this: `/usr/local/lua/`*module*`/`*submodule*`.lua`
+- For C libraries, `require()` looks for a function called
+  `luaopen_`*module*`_`*submodule*`()` to load the submodule
