@@ -1,3 +1,7 @@
+#!/usr/bin/env lua
+-- file: factorial.lua
+-- an factorial function taken from the book
+
 -- defines a factorial function
 function fact(n)
     if n == 0 then
