@@ -13,12 +13,14 @@ Chapter 16: Object-Oriented Programming
   a reference to the state of the object is needed
 - Lua has special syntax for this:
 
+    ~~~~~~
     Account = {balance=0} -- array object table
     
     function Account:withdraw(amount)
         -- 'self' is the state of the object
         self.balance = self.balance - amount
     end
+    ~~~~~~
 
 - The new syntax uses the *colon operator* (`:`), which hides
   having to pass the state to methods away
@@ -31,12 +33,14 @@ Chapter 16: Object-Oriented Programming
   method can create instances of a class and provide an
   interface to make subclasses:
 
+    ~~~~~~
     function Account:new(o)
         o = o or {}
         setmetatable(o, self)   -- setting metatable
         self.__index = self     -- allows subclassing
         return o
     end
+    ~~~~~~
 
 - With this kind of setup, any methods and default values
   will come from Account (due to the metatable), anything
@@ -46,6 +50,7 @@ Chapter 16: Object-Oriented Programming
   can call the `new()` method on any object of this class),
   this is how subclassing works:
 
+    ~~~~~~
     -- standard account object
     acc = Account:new{balance = 5}
 
@@ -54,6 +59,7 @@ Chapter 16: Object-Oriented Programming
 
     -- special account object
     sacc = SpecialAccount:new{balance = 10}
+    ~~~~~~
 
 - Multiple inheritance needs some extra work to set up 
   the metatable correctly
