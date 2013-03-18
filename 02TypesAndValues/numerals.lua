@@ -1,4 +1,11 @@
+#!/usr/bin/env lua
 -- file: numerals.lua
+-- Exercise 2.2: Which of the following are valid
+-- numerals? What are their values?
+
+-- a numeral in Lua can consist of an optional
+-- base prefix, an integer part, a fractional
+-- part and an exponent
 
 -- shows which numerals are
 -- valid and which ones aren't
