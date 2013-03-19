@@ -1,5 +1,6 @@
+#!/usr/bin/env lua
 -- file: length.lua
--- shows some length operator stuff
+-- shows some length operator applications
 
 animals = {"cat", "dog", "mouse", "chicken"}
 print('#animals = ' .. #animals)
