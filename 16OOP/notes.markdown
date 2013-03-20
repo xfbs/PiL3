@@ -63,5 +63,12 @@ Chapter 16: Object-Oriented Programming
 
 - Multiple inheritance needs some extra work to set up 
   the metatable correctly
+- The way multiple inheritance can be implemented is by
+  defining a metamethod `__index` which looks for a 
+  requested method in all of the parents
+- This means that multiple inheritance is slower than
+  normal inheritance
 - There are ways of restricting access to object data in
   Lua, but they are not used often
+- One way is to use a proxy class which only allows
+  access to methods but not private data
