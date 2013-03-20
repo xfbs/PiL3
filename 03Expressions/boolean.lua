@@ -1,4 +1,7 @@
+#!/usr/bin/env lua
 -- file: boolean.lua
+-- Exercise 3.5: How can you check whether a value is boolean
+-- without using the type function?
 
 -- check if a variable is a boolean
 function is_boolean(v)
