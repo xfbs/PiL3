@@ -1,4 +1,8 @@
+#!/usr/bin/env lua
 -- file: npolynomials.lua
+-- Exercise 3.4: Can you write a function from the previous
+-- item so that it uses at most n additions and n multiplications
+-- (and no exponentiations)?
 
 -- coefficients are stored in a Lua array,
 -- with the first array member representing
