@@ -3,6 +3,8 @@
 -- Exercise 16.1: Implement a class Stack, with methods
 -- push, pop, top and isempty.
 
+-- the class table. the pointer is at 0 by default,
+-- which indicates an empty stack
 Stack = {pointer = 0}
 
 function Stack:new(o)
@@ -26,7 +28,13 @@ function Stack:isempty()
     return self.pointer == 0
 end
 
+function Stack:top()
+    -- returns the top or nil
+    return self[self.pointer]
+end
+
 function Stack:pop()
+    -- make sure the stack isn't empty
     if self:isempty() then return nil end
 
     -- get value
