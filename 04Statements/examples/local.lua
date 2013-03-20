@@ -1,5 +1,7 @@
+#!/usr/bin/env lua
 -- file: local.lua
--- some examples for local variables
+-- Lua supports local variables with the local operator.
+-- This shows some example of local/global variables:
 
 -- global count
 count = 1
