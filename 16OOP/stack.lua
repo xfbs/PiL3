@@ -1,5 +1,7 @@
+#!/usr/bin/env lua
 -- file: stack.lua
--- a simple stack class
+-- Exercise 16.1: Implement a class Stack, with methods
+-- push, pop, top and isempty.
 
 Stack = {pointer = 0}
 
