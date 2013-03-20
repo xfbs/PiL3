@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 -- file: multiple.lua
 -- some examples of multiple assignment
 
