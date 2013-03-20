@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 -- file: loop.lua
 -- Exercise 3.1: What will the following program
 -- print?
