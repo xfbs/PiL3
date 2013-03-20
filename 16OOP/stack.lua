@@ -48,3 +48,16 @@ function Stack:pop()
 
     return value
 end
+
+-- some tests
+s = Stack:new()
+assert(s:isempty())
+s:push(1)
+assert(not s:isempty())
+s:push(2)
+assert(not s:isempty())
+assert(s:top() == 2)
+assert(s:pop() == 2)
+assert(s:top() == 1)
+assert(s:pop() == 1)
+assert(s:isempty())
