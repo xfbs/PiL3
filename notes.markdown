@@ -682,6 +682,121 @@ Chapter 16: Object-Oriented Programming
 
 - Multiple inheritance needs some extra work to set up 
   the metatable correctly
+- The way multiple inheritance can be implemented is by
+  defining a metamethod `__index` which looks for a 
+  requested method in all of the parents
+- This means that multiple inheritance is slower than
+  normal inheritance
 - There are ways of restricting access to object data in
   Lua, but they are not used often
+- One way is to use a proxy class which only allows
+  access to methods but not private data
+
+Chapter 18: The Mathematical Library
+====================================
+
+- Comprises a standard set of mathematical functions
+    - trigonometric functions (`sin`, `cos`, `tan`, `asin`, `acos`, ...)
+    - exponentiation and logarithms (`exp`, `log`, `log10`)
+    - rounding functions (`floor`, `ceil`)
+    - `max` and `min`
+    - pseudorandom number generation functions (`random`, `randomseed`)
+- Additionally, it conatains some variables
+    - `pi`, the mathematical constant pi
+    - `huge`, the largest representable number
+- All trigonometric functions use radians, but the functions `rad` and `deg`
+  can be used to convert between them and degrees
+- The `random` function returns a random real number between 0 and 1 when
+  called without arguments
+- When called with one argument, an integer `n`, it returns a random number
+  between 1 and `n` inclusive
+- The pesudorandom number generator needs to be seeded, this can be done
+  with the current time with `math.randomseed(os.time())`
+
+
+Chapter 19: The Bitwise Library
+===============================
+
+- It is not easy to conciliate bitwise operations with floating-
+  point numbers
+- Lua 5.2 offers bitwise operations through a library: the 
+  `bit32` library
+- The bitwise library operates on unsigned 32-bit integers
+- It defines the following functions:
+
+    `band(...)`
+    :   Binary *and* of the passed numbers
+
+    `bor(...)`
+    :   Binary *or* of the passed numbers
+
+    `bnot(n)`
+    :   Binary *not* (negation) of *n*
+
+    `btest(...)`
+    :   Same as binary *and*, but returns `true` if the result
+        is nonzero and `false` otherwise
+
+    `lshift(n, a)`
+    :   Shift all bits of *n* to the left by a given amount *a*, 
+        filling empty spots with zero bits
+
+    `rshift(n, a)`
+    :   Shift all bits of *n* to the right by a given amount *a*, 
+        filling empty spots with zero bits
+
+    `arshift(n, a)`
+    :   Shift all bits of *n* to the right by a given amount *a*
+        (to the left if that amount is negative), fill vacant bits on
+        the left with copies of the last bit (the *signal bit*)
+
+    `lrotate(n, a)`
+    :   Rotate the bits of *n* to the left by a given amount *a*
+
+    `rrotate(n, a)`
+    :   Rotate the bits of *n* to the right by a given amount *a*
+
+    `extract(n, p, w)`
+    :   Extract *w* bits (1 if no *w* parameter specified) of 
+        *n*, starting at bit *p* (bits are counted from the
+        right, starting at 0)
+
+    `replace(n, b, p, w)`
+    :   Replace *w* bits of *n* with the ones specified in *b*,
+        starting at position *p*
+
+- All functions will convert numbers to be in the range
+  0 to MAX, where max is 2^32^-1
+- Numbers can be manually converted with the `bor()` or the
+  `band()` function (by passing them as the sole argument)
+
+Chapter 20: The Table Library
+=============================
+
+- Comprises auxillary functions to manipulate tables
+  as arrays
+- Provides functions to insert and remove elements from lists,
+  to sort the elements of an array and to concatenate all
+  string in an array:
+
+    `table.insert`
+    :   Inserts an element in a given position, moving up
+        other elements to open space
+
+    `table.remove`
+    :   Removes (and returns) an element from a given position
+        in an array, moving down other elements to close space
+
+    `table.sort`
+    :   Sorts an array, takes the array and optionally a sorting
+        function, otherwise it uses the comparison operator (`<`)
+        for sorting. This function can't sort tables, only
+        sequences (arrays)!
+
+    `table.concat`
+    :   Takes a list of strings and returns the result of
+        concatentaing all these strings. It can take an
+        optional seperator string to seperate the strings
+        from the array
+
 
