@@ -800,3 +800,305 @@ Chapter 20: The Table Library
         from the array
 
 
+Chapter 21: The String Library
+==============================
+
+- All functions can be found in the `string` table as well as in the metatable
+  of all strings
+- The basic string functions are:
+
+    `string.len`
+    :   Returns the length of a string, equivalent to the length operator (`#`)
+
+    `string.rep`
+    :   Repeats a string a given amount of times
+
+    `string.lower`
+    :   Uses the current locale setting to turn all characters of a given string
+        into lower-case characters
+
+    `string.upper`
+    :   Uses the current locale setting to turn all characters of a given string
+        into upper-case characters
+
+    `string.sub`
+    :   From a given string, return a substring of that starting and ending at
+        given indexes
+
+    `string.char`
+    :   Converts a number to whatever character it stands for in the current
+        locale
+
+    `string.byte`
+    :   Converts a string into it's internal numeric representation
+
+    `string.format`
+    :   Format a string using a *format string* similar to the ones the
+        C function `printf` accepts
+
+- The string library offers additional functions for pattern matching, string
+  searching and substitution
+- Patterns in Lua are not full regular expressions but they are very similar to
+  them with a few differences
+- These are some of the constructs Lua supports:
+    - *character classes*: `%a` (letters), `%c` (control characters), `%d` (digits),
+      `%l` (lower-case letters, `%u` (upper-case letters), `%p` (punctuation letters),
+      `%s` (space characters), `%w` (alpha-numeric characters) and `%x` (hexadecimal
+      digits)
+    - *magic characters*: pretty much just like in regular expressions, however
+      `%` is used as the escape character (instead of the backslash)
+    - *character groups* are done by enclosing the list of allowed characters in
+      square brackets (this will match any English vovel: `[aeiou]`)
+    - *groups* (called *captures* here) are enclosed in round brackets, like so: `(%u%l+)`. Pattern matching
+      functions will return all captures individually, and as opposed to
+      regular expressions, there can't be a variable amount of them (eg. they
+      can't be followed by a star or a plus)
+    - *lazy repetitions* can be denoted with a minus, like so: `%u[%a%s]-%.`, the
+      minus means the shortest possible sequence will be matched
+- Lua pattern matching facilities are not meant to work with UTF-8 encoded text,
+  while they can be made to work some things will not work as intended, for example
+  the character classes won't work for all characters
+- Unicode text can be represented in Lua strings, but the functions that the
+  string library offers don't all work on them: `string.reverse`, `string.byte`,
+  `string.char`, `string.upper` and `string.lower` all shouldn't be used on UTF-8
+  strings
+
+
+Chapter 22: The I/O Library
+===========================
+
+- Lua offers two different models for file manipulation
+- The *simple I/O model* does all it's operations on two
+  current files: the standard input (*stdin*) and the standard
+  output (*stdout*)
+- By default, *stdin* and *stdout* are connected to the console
+  from which the program is executed
+- Operations such as `io.write()` operate on the standard input
+  and output files
+- These current files can be changed with the `io.input()` and
+  `io.output()` functions
+- There are two main functions to work with the simple model:
+
+    `io.write`
+    :   gets an arbitrary number of string arguments and writes
+        them to the current output file, similar to the `print`
+        function, but offers more control over the output.
+
+    `io.read`
+    :   reads strings from the current input file, and takes
+        arguments describing what to read:
+
+        - `*a` to read the whole file
+        - `*l` to read a single line (without newline)
+        - `*L` to read a single line (with newline)
+        - `*n` to read a number, skipping any spaces prior 
+          to it or `nil` when it can't find one
+        - *num* reads a string with up to *num* characters
+
+- The *complete I/O model* offers more control and multiple
+  open files with something called *file handles*, which are
+  equivalent to `FILE*` streams in C
+- Every open file has a *file handle* associated with it, which
+  is an object that has methods for manipulating the file
+- The `io.open()` function can be used to open a file and get
+  a handle for it, it takes as arguments the name of the file
+  and in which *mode* to open it: possible are `r` for reading,
+  `w` for writing and `a` for appending and an optional `b` to
+  open binary files
+- Just like other Lua library functions, it returns `nil` plus
+  an error message and an error number in case of an error
+- After having opened a file `f`, there are read methods
+  (`f:read()`) and write methods (`f:write()`) available with
+  the same semantics as those from the simple I/O model
+- There are predefined file handles: `io.stdin`, `io.stdout`
+  and `io.stderr` for the three standard C streams
+- The complete model and the simple model can be mixed, for
+  example `io.input():write()` does the same as `io.write()`
+- To read big files in Lua it is advisable to use a relatively
+  large buffer size of efficiency
+- On Windows systems care must be taken to open files in the
+  correct mode: binary files must be opened in *binary mode*
+  to avoid their contents being changed while reading
+- Binary data is usually read with the `*a` flag or with
+  a given size of *n* bytes
+- `io.tmpfile()` returns a handle for a temporary file, open
+  in read/write mode
+- For a file handle `f`, `f:flush()` executes all pending
+  writes to the file
+- The `setvbuf` method sets the buffering mode of a stream,
+  it can be set to `"no"` (no buffering), `"full"` (the file
+  is only written when the buffer is full or it's flushed) or
+  `"line"` (it is buffered until a newline is output).
+- The `seek()` method can be set with the `set(whence, offset)`
+  method, the `whence` parameter is a string that specifies
+  how to interpret the offset: `"set"` interprets strings from
+  the beginning of the file, `"cur"` interprets them from the
+  current position, and `"end"` interprets them relative to
+  the end
+- Calling `seek()` on a file pointer (like `f:seek()`) returns
+  the current position in the file
+
+
+Chapter 23: The Operating System Library
+========================================
+
+- It is defined in the table `os`
+- Includes functions for file manipulation, getting the current
+  date and time, and other facilities related to the operating
+  system
+- Because Lua is written in ANSI C, it uses only the functionality
+  that the ANSI standard offers
+- For date and time, the `os` library offers two functions
+- The `os.time()` functions returns the current date and time,
+  coded as a number (usually a UNIX timestamp)
+- When called with a table, it returns the number representing
+  the date and time described by the table
+- Such a *date table* has the following fields: `year`, `month`,
+  `day`, `hour`, `min`, `sec`, `isdst` (true if daylight saving
+  is on)
+- Note that the result of the `os.time()` call depends on the
+  system's time zone
+- The `os.date()` function is a kind of a reverse of the `os.time()`
+  function: it converts the number describing the date and time into
+  some higher-level representation
+- It's first parameter is a format string describing the representation
+  we want
+- To produce a table, we use the format string `*t`, like so:
+  `os.date("*t", 906000490)`
+- Format strings have a similar syntax to that of `string.format()`,
+  however there are more possible values
+- For timing, the `os` library offers `os.clock()`, which returns the
+  number of seconds of CPU time have passed for the program
+- Other systems calls that the library supports are leaned on
+  the called available in standard C:
+
+    `os.exit()`
+    :   terminates the execution of the program, taking as parameter
+        the return status of the program, and as second argument
+        whether to close the Lua state (and calling finalizers) or
+        not
+
+    `os.getenv()`
+    :   gets the value of an environment variable, taking as argument
+        the name of the variable and returning it's value
+
+    `os.execute()`
+    :   runs a system command
+
+    `os.setlocale()`
+    :   sets the current locale used by the Lua program
+
+- Care must be taken to set the locale of the Lua program to the
+  standard `C` locale when creating pieces of code from within Lua
+
+
+Chapter 24: The Debug Library
+=============================
+
+- The debug library offers all the primitives needed to build
+  a debugger for Lua
+- Should be used sparingly because it lacks performance and it
+  breaks truths about the language
+- It offers two kinds of functions:
+    - *introspective functions*, which allow us to inspect
+      several aspects of the running program
+    - *hooks*, which allow us to trace the execution of a 
+      program
+- An important concept in the debug library is the *stack level*,
+  which refers to a particular function in the calling hierarchy
+
+    `debug.getinfo`
+    :   main introspective function in the debug library, it
+        offers insight into a given function but is quite slow
+
+    `debug.traceback`
+    :   constructs a traceback (a graph of the calling hierarchy)
+        and returns it as a string
+
+    `debug.getlocal`
+    :   allows us to inspect the local variables of any active
+        function as well as the parameters passed to it
+
+    `debug.setlocal`
+    :   like `getlocal`, but modifies a local variables instead
+        of just returning it
+
+    `debug.getupvalue`
+    :   grants access to the nonlocal variables of a function
+        and does not need the function to be active
+
+    `debug.setupvalue`
+    :   modifies a closure's upvalues (nonlocal variables)
+
+- Introspection functions can also optionally take a coroutine
+  as parameter to allow inspection of their states
+- There are four kinds of hooks in the debug library:
+    - *call* events when Lua calls a function
+    - *return* events when a function returns
+    - *line* events when Lua starts executing a new line of code
+    - *count* events after a given number of instructions
+
+- `debug.sethook` registers a hook with Lua so it will be called
+  when the requested event takes place
+- `debug.debug` starts an interactive debugging console
+- The hook mechanism can be used to profile code
+
+
+Chapter 25: An Overview of the C API
+====================================
+
+About the C API
+---------------
+
+- Lua is an *embedded language*
+- There are two kinds of interactions between Lua
+  and C code:
+    - As a **stand-alone language** that can be extended with
+      native C code (the C code is the library), this
+      makes Lua an *extensible language*
+    - As a **library** to integrate into C projects to extend
+      them (Lua is the library), this makes Lua an
+      *extension language*
+- The difference between the two kinds of interactions is the language
+  which has the control
+- The Lua interpreter uses Lua as a library
+- The C API is the set of functions that allow C code to
+  interact with Lua, it comprises a set of functions to:
+    - read and write Lua global variables
+    - call Lua functions
+    - run pieces of Lua code
+    - register C functions to be callable from within Lua
+- The C API follows the *modus operandi* of C, which means
+  that we must care about several inconveniences, including:
+    - type checking
+    - error recovery
+    - memory-allocation errors
+- Anything that can be done within Lua can also be done with
+  the C API, however it may be more lengthy (common tasks may
+  involve several API calls)
+- The major component in the communication between Lua and C is
+  an omnipresent virtual *stack*
+
+The Header Files
+----------------
+
+- The file `lua.h` defines the basic functions provided by Lua,
+  it includes functions to do the following:
+    - create a new Lua environment
+    - invoke Lua functions (eg. `lua_pcall`)
+    - read and write global variables in the Lua environment
+- All functions in `lua.h` are prefixed with `lua_`
+- The header fule `lauxlib.h` defines the functions provided by the
+  auxillary library (*auxlib*)
+- All functions in `lauxlib.h` are prefixed with `luaL_`
+- They use the basic functions defined in `lua.h` to provide a 
+  higher abstraction level
+- The Lua library keeps all its state in the dynamic structure
+  `lua_State`
+- New states can be created by the `luaL_newstate` function
+- The standard libraries are not loaded by default, this can
+  be done with `luaL_openlibs`
+- The function `luaL_loadstring` compiles Lua code, and pushes
+  the resulting function to the stack, returning nonzero on error.
+
+
