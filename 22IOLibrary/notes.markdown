@@ -1,7 +1,11 @@
 The I/O Library
 ---------------
 
-- Lua offers two different models for file manipulation
+Lua offers two different models for file manipulation: the *simple
+I/O model* and the *complete I/O model*, which are both similar
+to I/O streams as used in C
+
+### The Simple I/O Model
 - The *simple I/O model* does all its operations on two
   current files: the standard input (*stdin*) and the standard
   output (*stdout*)
@@ -29,6 +33,10 @@ The I/O Library
           to it or `nil` when it can't find one
         - *num* reads a string with up to *num* characters
 
+- The functions `io.input` and `io.output` can be used to change
+  which files are opened for *stdin* and *stdout*
+
+### The Complete I/O Model
 - The *complete I/O model* offers more control and multiple
   open files with something called *file handles*, which are
   equivalent to `FILE*` streams in C
@@ -48,6 +56,8 @@ The I/O Library
   and `io.stderr` for the three standard C streams
 - The complete model and the simple model can be mixed, for
   example `io.input():write()` does the same as `io.write()`
+- The functions `io.input` and `io.write` yield file handles
+  to *stdin* and *stdout* when called without arguments
 - To read big files in Lua it is advisable to use a relatively
   large buffer size of efficiency
 - On Windows systems care must be taken to open files in the
