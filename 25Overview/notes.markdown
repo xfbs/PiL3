@@ -1,8 +1,7 @@
 An Overview of the C API
 ------------------------
 
-About the C API
----------------
+### About the C API
 
 - Lua is an *embedded language*
 - There are two kinds of interactions between Lua
@@ -33,8 +32,7 @@ About the C API
 - The major component in the communication between Lua and C is
   an omnipresent virtual *stack*
 
-The Header Files
-----------------
+### The Header Files
 
 - The file `lua.h` defines the basic functions provided by Lua,
   it includes functions to do the following:
