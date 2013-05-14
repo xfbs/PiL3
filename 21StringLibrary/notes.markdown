@@ -1,5 +1,5 @@
-Chapter 21: The String Library
-------------------------------
+The String Library
+------------------
 
 - All functions can be found in the `string` table as well as in the metatable
   of all strings

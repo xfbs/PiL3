@@ -1,5 +1,5 @@
-Chapter 15: Modules and Packages
---------------------------------
+Modules and Packages
+--------------------
 
 - A *module* is some code (Lua or C) that can be loaded through
   `require()` and that creates and returns a table

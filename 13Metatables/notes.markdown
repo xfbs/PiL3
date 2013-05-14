@@ -1,5 +1,5 @@
-Chapter 13: Metatables and Metamethods
---------------------------------------
+Metatables and Metamethods
+--------------------------
 
 - *Metatables* allow us to change the behavior of a value when
   confronted with an undefined operation

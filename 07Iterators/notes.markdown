@@ -1,5 +1,5 @@
-Chapter 7: Iterators and the Generic for
-----------------------------------------
+Iterators and the Generic for
+-----------------------------
 
 - An iterator is any construction that allows you to *iterate* over the elements
   of a collection

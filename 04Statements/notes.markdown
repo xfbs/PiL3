@@ -1,5 +1,5 @@
-Chapter 4: Statements
----------------------
+Statements
+----------
 
 - Lua allows *multiple assignment*, which assigns a list of values to a list of
   variables in one step, both lists have their elements seperated by commas

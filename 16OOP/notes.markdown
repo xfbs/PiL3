@@ -1,5 +1,5 @@
-Chapter 16: Object-Oriented Programming
----------------------------------------
+Object-Oriented Programming
+---------------------------
 
 - A table in Lua is like an object in more than one sense
     - tables have a state

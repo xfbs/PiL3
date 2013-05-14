@@ -1,5 +1,5 @@
-Chapter 17: Weak Tables and Finalizers
---------------------------------------
+Weak Tables and Finalizers
+--------------------------
 
 - Lua does automatic memory management
 - Lua automaticallz deletes objects that become garbage,

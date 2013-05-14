@@ -1,5 +1,5 @@
-Chapter 2: Types and Values
----------------------------
+Types and Values
+----------------
 
 - Lua has eight basic types: `nil`, `boolean`, `number`, `string`, `userdata`,
   `function`, `thread` and `table`

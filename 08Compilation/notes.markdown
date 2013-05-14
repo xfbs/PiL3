@@ -1,5 +1,5 @@
-Chapter 8: Compilation, Execution and Errors
---------------------------------------------
+Compilation, Execution and Errors
+---------------------------------
 
 - Lua always *precompiles* source code to intermediate form (bytecode) before 
   running it

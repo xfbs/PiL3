@@ -1,5 +1,5 @@
-Chapter 22: The I/O Library
----------------------------
+The I/O Library
+---------------
 
 - Lua offers two different models for file manipulation
 - The *simple I/O model* does all it's operations on two

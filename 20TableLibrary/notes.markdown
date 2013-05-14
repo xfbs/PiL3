@@ -1,5 +1,5 @@
-Chapter 20: The Table Library
------------------------------
+The Table Library
+-----------------
 
 - Comprises auxillary functions to manipulate tables
   as arrays

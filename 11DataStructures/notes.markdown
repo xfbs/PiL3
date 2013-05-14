@@ -1,5 +1,5 @@
-Chapter 11: Data Structures
----------------------------
+Data Structures
+---------------
 
 - Tables in Lua are *the* data structure
 - All other data structures can be implemented quite efficiently

@@ -1,5 +1,5 @@
-Chapter 9: Coroutines
----------------------
+Coroutines
+----------
 
 - Coroutines in Lua are like threads: they are a line of execution with their
   own stack, local variables and instruction pointer but sharing the global

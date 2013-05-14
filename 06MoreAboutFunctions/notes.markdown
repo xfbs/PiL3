@@ -1,5 +1,5 @@
-Chapter 6: More about Functions
--------------------------------
+More about Functions
+--------------------
 
 - Functions in Lua are *first-class values* with *proper lexical scoping*, meaning
   that they can access variables of their enclosing functions

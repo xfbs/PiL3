@@ -1,5 +1,5 @@
-Chapter 12: Data Files and Persistence
---------------------------------------
+Data Files and Persistence
+--------------------------
 
 - Writing data to file is easier than reading it
   back, since then it needs to be *parsed*
