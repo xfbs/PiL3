@@ -1,5 +1,14 @@
-Chapter 1: Getting Started
-==========================
+Programming in Lua Notes
+========================
+
+Programming in Lua gives a solid base for any programmer who wants to use
+Lua. It covers all aspects of Lua—from the basics to its API with C—explaining
+how to make good use of its features and giving numerous code examples.
+The book is targeted at people with some programming background, but it
+does not assume any prior knowledge about Lua or other scripting languages.
+
+Getting Started
+---------------
 
 - Each piece of code that Lua executes is called a *chunk*
 - Lua needs no seperator between consecutive statements (but you can use a
@@ -16,8 +25,8 @@ Chapter 1: Getting Started
   the result of that expression
 - Any arguments to a script are in the global variable `arg` by default
 
-Chapter 2: Types and Values
-===========================
+Types and Values
+----------------
 
 - Lua has eight basic types: `nil`, `boolean`, `number`, `string`, `userdata`,
   `function`, `thread` and `table`
@@ -54,8 +63,8 @@ Chapter 2: Types and Values
   the *length operator* (`#`)
 - Userdata variables allow C data to be stored in Lua variables
 
-Chapter 3: Expressions
-======================
+Expressions
+-----------
 
 - Exponentiation is done in Lua with the caret (`^`)
 - Modulus is obtained from a number with the percent sign (`%`)
@@ -92,8 +101,8 @@ Chapter 3: Expressions
         identifiers and can in fact be of any type, it looks
         like this: `{["field one"]=324, ["field two"]="value two", ...}`
 
-Chapter 4: Statements
-=====================
+Statements
+----------
 
 - Lua allows *multiple assignment*, which assigns a list of values to a list of
   variables in one step, both lists have their elements seperated by commas
@@ -131,8 +140,8 @@ Chapter 4: Statements
   block where the variable is defined, labels are considered void statements
 - Gotos can be used to emulate functionality like `continue`
 
-Chapter 5: Functions
-====================
+Functions
+---------
 
 - If a function has one single argument and that argument is either a string
   literal or a table constructor, the parentheses (in a function call) are
@@ -158,8 +167,8 @@ Chapter 5: Functions
   the key is the name of that argument
 - Can look like this: `copy{src="file1", dest="file2"}`
 
-Chapter 6: More about Functions
-===============================
+More about Functions
+--------------------
 
 - Functions in Lua are *first-class values* with *proper lexical scoping*, meaning
   that they can access variables of their enclosing functions
@@ -188,8 +197,8 @@ Chapter 6: More about Functions
 - Lua does proper *tail-call elimination* (tail calls do not cost stack space)
 - Tail calls need to be in the form `return func(args)`
 
-Chapter 7: Iterators and the Generic for
-========================================
+Iterators and the Generic for
+-----------------------------
 
 - An iterator is any construction that allows you to *iterate* over the elements
   of a collection
@@ -212,8 +221,8 @@ Chapter 7: Iterators and the Generic for
 - They aren't used very much anymore since they have some drawbacks 
   (like difficult parallel iteration)
 
-Chapter 8: Compilation, Execution and Errors
-============================================
+Compilation, Execution and Errors
+---------------------------------
 
 - Lua always *precompiles* source code to intermediate form (bytecode) before 
   running it
@@ -269,8 +278,8 @@ Chapter 8: Compilation, Execution and Errors
 - Two common message handlers are `debug.debug` (provides interactive console)
   and `debug.traceback` (builds an extended error message with the traceback)
 
-Chapter 9: Coroutines
-=====================
+Coroutines
+----------
 
 - Coroutines in Lua are like threads: they are a line of execution with their
   own stack, local variables and instruction pointer but sharing the global
@@ -324,8 +333,8 @@ Chapter 9: Coroutines
 - The non-preemptive multitasking that they offer can be used to concurrently
   download files from the internet if *non-blocking sockets* are available
 
-Chapter 10: Complete Examples
-=============================
+Complete Examples
+-----------------
 
 - The *eight-queen puzzle* is solved with a configuration of eight
   queens on a chessboard in a way that no queen can attack another
@@ -338,8 +347,8 @@ Chapter 10: Complete Examples
   in a base text
 - The resulting text is very, but not quite, random
 
-Chapter 11: Data Structures
-===========================
+Data Structures
+---------------
 
 - Tables in Lua are *the* data structure
 - All other data structures can be implemented quite efficiently
@@ -393,8 +402,8 @@ Chapter 11: Data Structures
   seperator
 - File should, however, rather be read with `io.read("*a")`
 
-Chapter 12: Data Files and Persistence
-======================================
+Data Files and Persistence
+--------------------------
 
 - Writing data to file is easier than reading it
   back, since then it needs to be *parsed*
@@ -433,8 +442,8 @@ Chapter 12: Data Files and Persistence
   other parts of the same table)
 - To represent cycled tables, named tables are needed
 
-Chapter 13: Metatables and Metamethods
-======================================
+Metatables and Metamethods
+--------------------------
 
 - *Metatables* allow us to change the behavior of a value when
   confronted with an undefined operation
@@ -533,8 +542,8 @@ Chapter 13: Metatables and Metamethods
   table, for example to track access or to block certain kinds of
   access (eg. *read-only*)
 
-Chapter 14: The Environment
-===========================
+The Environment
+---------------
 
 - Lua keeps all global variables in a regular table, called the
   *global environment*
@@ -583,8 +592,8 @@ Chapter 14: The Environment
   Lua ensures that it has only one upvalue and that this
   upvalue is `_ENV`
 
-Chapter 15: Modules and Packages
-================================
+Modules and Packages
+--------------------
 
 - A *module* is some code (Lua or C) that can be loaded through
   `require()` and that creates and returns a table
@@ -617,8 +626,8 @@ Chapter 15: Modules and Packages
 - For C libraries, `require()` looks for a function called
   `luaopen_`*module*`_`*submodule*`()` to load the submodule
 
-Chapter 16: Object-Oriented Programming
-=======================================
+Object-Oriented Programming
+---------------------------
 
 - A table in Lua is like an object in more than one sense
     - tables have a state
@@ -692,8 +701,63 @@ Chapter 16: Object-Oriented Programming
 - One way is to use a proxy class which only allows
   access to methods but not private data
 
-Chapter 18: The Mathematical Library
-====================================
+Weak Tables and Finalizers
+--------------------------
+
+- Lua does automatic memory management
+- Lua automaticallz deletes objects that become garbage,
+  using *garbage collection*
+- Lua has no problems with cycles
+- Sometimes the garbage collector needs your help
+- *Weak tables* and *finalizers* are mechanisms that you
+  can use in Lua to help the garbage collector
+- *Weak tables* allow the collection of Lua objects
+  that are still accessible to the program, while finalizers
+  allow the collection of external objects that are not
+  under control of the garbage collector
+- A garbage collector can collect only what it can be
+  sure is garbage
+- Any object stored in a global variable is not garbage
+  to Lua, even if it isn't used again
+- Weak tables allow you to tell Lua that a reference should
+  not prevent the reclamation of an object
+- A *weak reference* is a reference to an object that is
+  not considered by the garbage collector
+- A *weak table* is a table whose entries are weak
+- Tables have strong keys and values by default
+- The weakness of a table is given by the field `__mode`
+  of it's metatable, which can be `k` for weak keys,
+  `v` for weak values or a combination of those
+- Only objects can be collected from a weak table
+- Like numbers and booleans, strings are not collected
+  from weak tables
+- Weak tables can be used to *memoize* functions
+- In Lua 5.2, a table with weak keys and string values
+  is an *ephemeron table*, where the accessibility of
+  a key controls the accessibility of the corresponding
+  value
+- A *finalizer* is a function associated with an object
+  that is called when that object is about to be collected
+- Finalizers are implemented through the metamethod `__gc`
+- This metamethod needs to be present when setting the
+  metatable to mark the object for finalization
+- When the finalizer runs, it gets the object to be
+  finalized as a parameter, this is called *transient
+  resurrection*
+- The finalizer could store the object in a global 
+  variable, *permanently resurrecting* it
+- Finalizers are run in reverse order that the objects
+  were marked for finalization in
+- The finalizer for each object runs exactly once
+- Objects with finalizers are collected in two phases:
+    1. The collector detects that they are not reachable
+       and calls their finalizers
+    2. Next time the collector detects that the object
+       is not reachable, it deletes the object
+
+
+The Mathematical Library
+------------------------
 
 - Comprises a standard set of mathematical functions
     - trigonometric functions (`sin`, `cos`, `tan`, `asin`, `acos`, ...)
@@ -714,8 +778,8 @@ Chapter 18: The Mathematical Library
   with the current time with `math.randomseed(os.time())`
 
 
-Chapter 19: The Bitwise Library
-===============================
+The Bitwise Library
+-------------------
 
 - It is not easy to conciliate bitwise operations with floating-
   point numbers
@@ -770,8 +834,8 @@ Chapter 19: The Bitwise Library
 - Numbers can be manually converted with the `bor()` or the
   `band()` function (by passing them as the sole argument)
 
-Chapter 20: The Table Library
-=============================
+The Table Library
+-----------------
 
 - Comprises auxillary functions to manipulate tables
   as arrays
@@ -800,8 +864,8 @@ Chapter 20: The Table Library
         from the array
 
 
-Chapter 21: The String Library
-==============================
+The String Library
+------------------
 
 - All functions can be found in the `string` table as well as in the metatable
   of all strings
@@ -864,8 +928,8 @@ Chapter 21: The String Library
   strings
 
 
-Chapter 22: The I/O Library
-===========================
+The I/O Library
+---------------
 
 - Lua offers two different models for file manipulation
 - The *simple I/O model* does all it's operations on two
@@ -939,8 +1003,8 @@ Chapter 22: The I/O Library
   the current position in the file
 
 
-Chapter 23: The Operating System Library
-========================================
+The Operating System Library
+----------------------------
 
 - It is defined in the table `os`
 - Includes functions for file manipulation, getting the current
@@ -992,8 +1056,8 @@ Chapter 23: The Operating System Library
   standard `C` locale when creating pieces of code from within Lua
 
 
-Chapter 24: The Debug Library
-=============================
+The Debug Library
+-----------------
 
 - The debug library offers all the primitives needed to build
   a debugger for Lua
@@ -1044,11 +1108,10 @@ Chapter 24: The Debug Library
 - The hook mechanism can be used to profile code
 
 
-Chapter 25: An Overview of the C API
-====================================
+An Overview of the C API
+------------------------
 
-About the C API
----------------
+### About the C API
 
 - Lua is an *embedded language*
 - There are two kinds of interactions between Lua
@@ -1079,8 +1142,7 @@ About the C API
 - The major component in the communication between Lua and C is
   an omnipresent virtual *stack*
 
-The Header Files
-----------------
+### The Header Files
 
 - The file `lua.h` defines the basic functions provided by Lua,
   it includes functions to do the following:
