@@ -1,5 +1,5 @@
 Chapter 18: The Mathematical Library
-====================================
+------------------------------------
 
 - Comprises a standard set of mathematical functions
     - trigonometric functions (`sin`, `cos`, `tan`, `asin`, `acos`, ...)

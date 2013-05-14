@@ -1,5 +1,5 @@
 Chapter 14: The Environment
-===========================
+---------------------------
 
 - Lua keeps all global variables in a regular table, called the
   *global environment*

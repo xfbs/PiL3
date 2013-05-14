@@ -1,5 +1,5 @@
 Chapter 24: The Debug Library
-=============================
+-----------------------------
 
 - The debug library offers all the primitives needed to build
   a debugger for Lua

@@ -1,5 +1,5 @@
 Chapter 5: Functions
-====================
+--------------------
 
 - If a function has one single argument and that argument is either a string
   literal or a table constructor, the parentheses (in a function call) are

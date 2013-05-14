@@ -1,5 +1,5 @@
 Chapter 10: Complete Examples
-=============================
+-----------------------------
 
 - The *eight-queen puzzle* is solved with a configuration of eight
   queens on a chessboard in a way that no queen can attack another

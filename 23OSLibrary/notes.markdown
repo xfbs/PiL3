@@ -1,5 +1,5 @@
 Chapter 23: The Operating System Library
-========================================
+----------------------------------------
 
 - It is defined in the table `os`
 - Includes functions for file manipulation, getting the current

@@ -1,5 +1,5 @@
 Chapter 19: The Bitwise Library
-===============================
+-------------------------------
 
 - It is not easy to conciliate bitwise operations with floating-
   point numbers

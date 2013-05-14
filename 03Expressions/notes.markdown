@@ -1,5 +1,5 @@
 Chapter 3: Expressions
-======================
+----------------------
 
 - Exponentiation is done in Lua with the caret (`^`)
 - Modulus is obtained from a number with the percent sign (`%`)
