@@ -1,8 +1,8 @@
 The Bitwise Library
 -------------------
 
-- It is not easy to conciliate bitwise operations with floating-
-  point numbers
+- It is not easy to conciliate bitwise operations with 
+  floating-point numbers
 - Lua 5.2 offers bitwise operations through a library: the 
   `bit32` library
 - The bitwise library operates on unsigned 32-bit integers
