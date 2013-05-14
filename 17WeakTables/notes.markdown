@@ -1,6 +1,7 @@
 Weak Tables and Finalizers
 --------------------------
 
+### Weak Tables
 - Lua does automatic memory management
 - Lua automaticallz deletes objects that become garbage,
   using *garbage collection*
@@ -33,6 +34,8 @@ Weak Tables and Finalizers
   is an *ephemeron table*, where the accessibility of
   a key controls the accessibility of the corresponding
   value
+
+### Finalizers
 - A *finalizer* is a function associated with an object
   that is called when that object is about to be collected
 - Finalizers are implemented through the metamethod `__gc`
