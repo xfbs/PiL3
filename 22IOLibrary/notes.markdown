@@ -2,7 +2,7 @@ The I/O Library
 ---------------
 
 - Lua offers two different models for file manipulation
-- The *simple I/O model* does all it's operations on two
+- The *simple I/O model* does all its operations on two
   current files: the standard input (*stdin*) and the standard
   output (*stdout*)
 - By default, *stdin* and *stdout* are connected to the console
