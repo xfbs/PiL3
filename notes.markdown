@@ -561,8 +561,8 @@ The Environment
 - In a metamethod, `debug.getinfo(2, "S")` returns a table whose
   field `what` tells whether the function that called it is
   a main chunk, a regular Lua function or a C function
-- In Lua, global variables do not need to be truly global (eg.
-  the could be *nonlocal*)
+- In Lua, global variables do not need to be truly global
+  (they can be *nonlocal*)
 - A *free name* is a name that is not bound to an explicit
   declaration, that is, it does not occur inside the scope of
   a local variable with that name
@@ -704,6 +704,7 @@ Object-Oriented Programming
 Weak Tables and Finalizers
 --------------------------
 
+### Weak Tables
 - Lua does automatic memory management
 - Lua automaticallz deletes objects that become garbage,
   using *garbage collection*
@@ -736,6 +737,8 @@ Weak Tables and Finalizers
   is an *ephemeron table*, where the accessibility of
   a key controls the accessibility of the corresponding
   value
+
+### Finalizers
 - A *finalizer* is a function associated with an object
   that is called when that object is about to be collected
 - Finalizers are implemented through the metamethod `__gc`
@@ -786,53 +789,49 @@ The Bitwise Library
 - Lua 5.2 offers bitwise operations through a library: the 
   `bit32` library
 - The bitwise library operates on unsigned 32-bit integers
+- All functions will convert numbers to 32-bit integers (meaning
+  that they are in the range 0 to `MAX`, where `MAX` is 2^32^-1)
 - It defines the following functions:
 
-    `band(...)`
-    :   Binary *and* of the passed numbers
+    `band`
+    :   binary *and*
 
-    `bor(...)`
-    :   Binary *or* of the passed numbers
+    `bor`
+    :   binary *or*
 
-    `bnot(n)`
-    :   Binary *not* (negation) of *n*
+    `bnot`
+    :   binary *not* (negation)
 
-    `btest(...)`
-    :   Same as binary *and*, but returns `true` if the result
+    `btest`
+    :   same as binary *and*, but returns `true` if the result
         is nonzero and `false` otherwise
 
-    `lshift(n, a)`
-    :   Shift all bits of *n* to the left by a given amount *a*, 
-        filling empty spots with zero bits
+    `lshift`
+    :   shift all bits of the number to the left by the specified 
+        amount, filling empty spots with zero bits
 
-    `rshift(n, a)`
-    :   Shift all bits of *n* to the right by a given amount *a*, 
-        filling empty spots with zero bits
+    `rshift`
+    :   just like `lshift` but in the opposite direction
 
-    `arshift(n, a)`
-    :   Shift all bits of *n* to the right by a given amount *a*
-        (to the left if that amount is negative), fill vacant bits on
-        the left with copies of the last bit (the *signal bit*)
+    `arshift`
+    :   just like `rshift`, but fills vacant bits on the left with
+        copies of the last bit (the *signal bit*)
 
-    `lrotate(n, a)`
-    :   Rotate the bits of *n* to the left by a given amount *a*
+    `lrotate`
+    :   rotate the bits to the left by a given amount
 
-    `rrotate(n, a)`
-    :   Rotate the bits of *n* to the right by a given amount *a*
+    `rrotate`
+    :   Rotate the bits to the right by a given amount
 
-    `extract(n, p, w)`
-    :   Extract *w* bits (1 if no *w* parameter specified) of 
-        *n*, starting at bit *p* (bits are counted from the
-        right, starting at 0)
+    `extract`
+    :   extract bits from a number
 
-    `replace(n, b, p, w)`
-    :   Replace *w* bits of *n* with the ones specified in *b*,
-        starting at position *p*
+    `replace`
+    :   replace bits of a number with different ones
 
-- All functions will convert numbers to be in the range
-  0 to MAX, where max is 2^32^-1
-- Numbers can be manually converted with the `bor()` or the
-  `band()` function (by passing them as the sole argument)
+- Numbers can be converted to 32-bit integers by passing them
+  as the sole argument to the `band` or `bor` functions
+
 
 The Table Library
 -----------------
@@ -931,8 +930,12 @@ The String Library
 The I/O Library
 ---------------
 
-- Lua offers two different models for file manipulation
-- The *simple I/O model* does all it's operations on two
+Lua offers two different models for file manipulation: the *simple
+I/O model* and the *complete I/O model*, which are both similar
+to I/O streams as used in C
+
+### The Simple I/O Model
+- The *simple I/O model* does all its operations on two
   current files: the standard input (*stdin*) and the standard
   output (*stdout*)
 - By default, *stdin* and *stdout* are connected to the console
@@ -959,6 +962,10 @@ The I/O Library
           to it or `nil` when it can't find one
         - *num* reads a string with up to *num* characters
 
+- The functions `io.input` and `io.output` can be used to change
+  which files are opened for *stdin* and *stdout*
+
+### The Complete I/O Model
 - The *complete I/O model* offers more control and multiple
   open files with something called *file handles*, which are
   equivalent to `FILE*` streams in C
@@ -978,6 +985,8 @@ The I/O Library
   and `io.stderr` for the three standard C streams
 - The complete model and the simple model can be mixed, for
   example `io.input():write()` does the same as `io.write()`
+- The functions `io.input` and `io.write` yield file handles
+  to *stdin* and *stdout* when called without arguments
 - To read big files in Lua it is advisable to use a relatively
   large buffer size of efficiency
 - On Windows systems care must be taken to open files in the
