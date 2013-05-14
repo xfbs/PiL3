@@ -7,7 +7,10 @@
 echo -n > notes.markdown
 
 # add header
-echo "Programming in Lua Notes
+echo "% Programming in Lua Notes
+% Patrick M. Elsen
+
+Programming in Lua Notes
 ========================
 
 Programming in Lua gives a solid base for any programmer who wants to use
@@ -24,4 +27,4 @@ for note in ./*/notes.markdown; do
 done
 
 # make pdf
-pandoc -o notes.pdf notes.markdown
+pandoc --toc -V papersize:"a4paper" -o notes.pdf notes.markdown
