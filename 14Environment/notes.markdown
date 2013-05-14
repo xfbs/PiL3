@@ -17,8 +17,8 @@ The Environment
 - In a metamethod, `debug.getinfo(2, "S")` returns a table whose
   field `what` tells whether the function that called it is
   a main chunk, a regular Lua function or a C function
-- In Lua, global variables do not need to be truly global (eg.
-  the could be *nonlocal*)
+- In Lua, global variables do not need to be truly global
+  (they can be *nonlocal*)
 - A *free name* is a name that is not bound to an explicit
   declaration, that is, it does not occur inside the scope of
   a local variable with that name
