@@ -1,5 +1,15 @@
 -- file: serialize.lus
--- serialize tables without cycles
+-- Exercise 12.1: Modify the code in Listing 12.2 so that it
+-- indents nested tables.
+-- Exercise 12.2: Modify the code in Listin 12.2 so that it
+-- uses the syntax ["key"]=value, as suggested in Section 12.2.
+-- Exercise 12.3: Modify the code of the previous exercise so
+-- that it uses the syntax ["key"]=value only when necessary
+-- (that is, when the key is a string but not a valid identifier)
+-- Exercise 12.4: Modify the code of the previous exercise so
+-- that it uses the constructor syntax for lists whenever
+-- possible. For instance, it should serialize the table
+-- {14,15,19} as {14,15,19}, not as {[1]=14,[2]=15,[3]=19}.
 
 function serialize(o, args)
     -- table of default values
