@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 -- Exercise 21.1: Write a split function that receives a string and
--- a delimiter pattern and returns a sequence with the chuncls in the
+-- a delimiter pattern and returns a sequence with the chunks in the
 -- original string separated by the delimiter
 
 function split(s, delim)
