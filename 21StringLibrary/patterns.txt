@@ -1,0 +1,17 @@
+Exercise 21.2: The patterns "%D" and "[^%d]" are equivalent.
+What about the patterns "[^%d%u]" and "[%D%U]"?
+
+The pattern "%D" matches anything that is not a digit,
+the lower-case version, "%d" matches anything that is
+a digit but it's negated by the caret "[^%d]". This is why
+the two are equivalent.
+
+However, the patterns "[^%d%u]" and "[%D%U]" are not
+equivalent. The pattern "[%D%U]" will match anything
+that is EITHER not a digit or anything that is not
+an upper-case letter, meaning that in fact it will
+match anything (all digits are not upper-case letters
+and all upper-case letters are not digits).
+The pattern "[^%d%u]", on the other hand, matches
+anything that is not a digit AND not an upper-case
+letter.
