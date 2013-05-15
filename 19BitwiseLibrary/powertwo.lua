@@ -31,3 +31,10 @@ function powertwo(num)
     -- has been set (otherwise it's 0)
     return bit == 1
 end
+
+assert(powertwo(2))
+assert(powertwo(4))
+assert(powertwo(32))
+assert(not powertwo(5))
+assert(not powertwo(6))
+assert(not powertwo(98))
