@@ -1,6 +1,7 @@
+#!/usr/bin/env
 -- file: combinations.lua
--- prints all possible combination of
--- elements in an array
+-- Exercise 5.4: Write a function that receives an array and prints all
+-- combinations of the elements in the array.
 
 print("enter array items, when done enter 'end'")
 array = {}

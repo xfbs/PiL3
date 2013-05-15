@@ -1,4 +1,8 @@
+#!/usr/bin/env lua
 -- file: arrayprint.lua
+-- Exercise 5.2: Write a function that receives an array and prints all
+-- the elements in that array. Consider the pros and cons of using
+-- table.unpack in this function
 
 -- prints all the items in an array
 function arrayprint(ary)

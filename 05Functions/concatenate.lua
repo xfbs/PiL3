@@ -1,4 +1,7 @@
+#!/usr/bin/env lua
 -- file: concatenate.lua
+-- Exercise 5.1: Write a function that receives an arbitrary number
+-- of strings and returns all of them concatenated together
 
 -- function to concatenate all the strings
 -- passed as arguments
