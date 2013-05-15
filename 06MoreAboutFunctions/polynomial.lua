@@ -1,4 +1,12 @@
+#!/usr/bin/env lua
 -- file: polynomial.lua
+-- Exercise 6.2: Exercise 3.3 asked you to write a function that
+-- receives a polynomial (represented as a table) and a value
+-- for its variable, and returns the polynomial value.
+-- Write the curried version of that function. Your functions
+-- should receive a polynomial and returns a function that, when
+-- called with a value for x, returns the value of the polynomial
+-- for that x.
 
 -- a curried polynomial function
 function polynomial(coefficients)

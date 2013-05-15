@@ -1,7 +1,6 @@
 -- file: integral.lua
--- calculates the integral of a given function
--- probably not mathematically correct, but you
--- get the idea
+-- Exercise 6.1: Write a function integral that receives a function
+-- f and returns an approximation of its integral
 
 -- calculates the integral of function `func` in
 -- the given range using the provided delta

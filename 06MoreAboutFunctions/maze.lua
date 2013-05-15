@@ -1,5 +1,10 @@
+#!/usr/bin/env lua
 -- file: maze.lua
--- implemented using tail calls
+-- Exercise 6.4: As we have seen, a tail call is a goto in
+-- disguise. Using this idea, reimplement the simple maze
+-- game from section 4.4 using tail calls. Each block
+-- should become a new function, and each goto becomes
+-- a tail call.
 
 -- room one function
 function room1()
