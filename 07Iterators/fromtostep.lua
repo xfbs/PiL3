@@ -1,4 +1,7 @@
 -- file: fromtostep.lua
+-- Exercise 7.2: Add a step parameter to the iterator from the
+-- previous exercise. Can you still implement it as stateless
+-- iterator?
 
 -- fromto iterator generator with step variable
 function fromto(min, max, step)

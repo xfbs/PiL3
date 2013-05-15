@@ -1,6 +1,6 @@
 -- file: substrings.lua
--- defines an iterator that returns ALL
--- non-empty substrings of a given string
+-- Exercise 7.4: Write an iterator that returns all non-empty
+-- substrings of a given string.
 
 -- the iterator
 function substrings(str)

@@ -1,6 +1,14 @@
 -- file: fromto.lua
--- implements an iterator with two
--- approaches
+-- Exercise 7.1: Write an iterator fromto such that the next two
+-- loops become equivalent:
+--
+-- for i in fromto(n, m) do
+--   <body>
+-- end
+--
+-- for i = n, m do
+--   <body>
+-- end
 
 -- stateless iterator implementation
 function fromto(min, max)

@@ -1,6 +1,6 @@
 -- file: uniquewords.lua
--- an iterator example that iterates over 
--- unique words in a file
+-- Exercise 7.3: Write an iterator uniquewords that returns all
+-- words from a given file without repetitions.
 
 -- factory function for the iterator
 function uniquewords()
