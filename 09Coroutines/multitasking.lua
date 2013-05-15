@@ -1,5 +1,6 @@
 -- file: multitasking.lua
--- an example of non-preemptive multitasking in Lua
+-- Exercise 9.2: Implement and run the code of the previous
+-- section (non-preemptive multitasking)
 socket = require("socket")
 
 -- function to download a web page

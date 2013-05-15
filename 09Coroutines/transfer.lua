@@ -1,6 +1,8 @@
 -- file: transfer.lua
--- an example of how to switch between
--- coroutines in a non-asymmetric way
+-- Exercise 9.3: Implement a transfer function in Lua. If you think
+-- about resume-yield as similar to call-return, a transfer would
+-- be like a goto: it suspends the running coroutine and resumes
+-- any other coroutine, given as argument.
 coroutines = {}
 
 -- transfer control to a given coroutine

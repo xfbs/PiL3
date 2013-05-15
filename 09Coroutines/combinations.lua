@@ -1,6 +1,6 @@
 -- file: combinations.lua
--- prints all possible combination of
--- elements in an array
+-- Exercise 9.1: Use coroutines to transform the function in
+-- Exercise 5.4 into a generator for combinations.
 
 function generator(ary)
     -- local combinations function (ripped from Exercise 5.4)
