@@ -4,6 +4,11 @@
 -- original string separated by the delimiter
 
 function split(s, delim)
+    -- make sure that neither of the arguments is an empty string
+    if #s==0 or #delim==0 then
+        return {}
+    end
+
     -- match indices
     local match_start = 0
     local match_end = 0
