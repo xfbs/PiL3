@@ -1,0 +1,163 @@
+ToDo
+====
+
+Chapter 1
+[X] notes
+[X] exercises
+[X] examples
+
+Chapter 2
+[X] notes
+[X] exercises
+[X] examples
+
+Chapter 3
+[X] notes
+[X] exercises
+[X] examples
+
+Chapter 4
+[X] notes
+[X] exercises
+[X] examples
+
+Chapter 5
+[X] notes
+[X] exercises
+[X] examples
+
+Chapter 6
+[X] notes
+[~] exercises
+[X] examples
+
+Chapter 7
+[X] notes
+[X] exercises
+[X] examples
+
+Chapter 8
+[X] notes
+[X] exercises
+[X] examples
+
+Chapter 9
+[X] notes
+[X] exercises
+[X] examples
+
+Chapter 10
+[X] notes
+[ ] exercises
+[X] examples
+
+Chapter 11
+[X] notes
+[ ] exercises
+[X] examples
+
+Chapter 12
+[X] notes
+[ ] exercises
+[X] examples
+
+Chapter 13
+[X] notes
+[X] exercises
+[X] examples
+
+Chapter 14
+[X] notes
+[X] exercises
+[X] examples
+
+Chapter 15
+[X] notes
+[ ] exercises
+[ ] examples
+
+Chapter 16
+[X] notes
+[X] exercises
+[X] examples
+
+Chapter 17
+[X] notes
+[X] exercises
+[X] examples
+
+Chapter 18
+[X] notes
+[ ] exercises
+[ ] examples
+
+Chapter 19
+[X] notes
+[ ] exercises
+[X] examples
+
+Chapter 20
+[X] notes
+[ ] exercises
+[ ] examples
+
+Chapter 21
+[X] notes
+[X] exercises
+[ ] examples
+
+Chapter 22
+[X] notes
+[ ] exercises
+[ ] examples
+
+Chapter 23
+[X] notes
+[ ] exercises
+[ ] examples
+
+Chapter 24
+[X] notes
+[ ] exercises
+[ ] examples
+
+Chapter 25
+[X] notes
+[ ] exercises
+[ ] examples
+
+Chapter 26
+[X] notes
+[ ] exercises
+[ ] examples
+
+Chapter 27
+[X] notes
+[ ] exercises
+[ ] examples
+
+Chapter 28
+[ ] notes
+[ ] exercises
+[ ] examples
+
+Chapter 29
+[ ] notes
+[ ] exercises
+[ ] examples
+
+Chapter 30
+[ ] notes
+[ ] exercises
+[ ] examples
+
+Chapter 31
+[ ] notes
+[ ] exercises
+[ ] examples
+
+Chapter 32
+[ ] notes
+[ ] exercises
+[ ] examples
+
