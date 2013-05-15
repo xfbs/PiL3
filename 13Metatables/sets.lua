@@ -1,5 +1,8 @@
 -- file: sets.lua
--- implementation of sets using lua tables
+-- Exercise 13.1: Define a metamethod __sub for sets that returns
+-- the difference of two sets
+-- Exercise 13.2: Define a metamethod __len for sets so that #s
+-- returns the number of elements in set s
 
 Set = {}
 Set.mt = {}
