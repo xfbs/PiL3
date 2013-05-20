@@ -1,5 +1,7 @@
+#!/usr/bin/env lua
 -- file: sets.lua
--- implementation of sets using lua tables
+-- Exercise 15.1: Rewrite the code in Listing 13.1 as
+-- a proper module
 
 Set = {}
 local mt = {}
