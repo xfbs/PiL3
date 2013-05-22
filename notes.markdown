@@ -1406,4 +1406,209 @@ looks like this:
 4. Finally, the resulting string is placed on top of
   the stack with a call to `luaL_pushresult`
 
+One thing to keep in mind when using buffers is that
+they keep some intermediate results on the stack
+after initialization
+
+### Storing State in C Functions
+- Frequently, C functions need to keep some non-local
+  data
+- This can be done in C with *global* or *static*
+  variables
+- When programming with Lua however, this is not a
+  good idea:
+    - you cannot store a generic Lua value in a 
+      C variable
+    - this approach will not work with multiple
+      Lua states
+
+- To solve this, the C API offers two places to
+  store non-local data:
+    - the registry
+    - upvalues
+
+- The *registry* is a global table, only accessible
+  from C, that can be used to store any Lua value
+- It can be used to store data to be shared among
+  several modules
+- The registry can be accessed from the stack at
+  the *pseudo-index* `LUA_REGISTRYINDEX` (it's not
+  really on the stack but accessible from there)
+- The registry is a regular Lua table
+- All C modules share the same registry, so indexes
+  must be wisely chosen
+- The registry also offers the *reference system*,
+  which stores Lua values in the registry and
+  generated integer indexes which can be used somewhat
+  like pointers
+- This call pops a value from the stack, stores
+  it in the registry and returns an integer that
+  serves as an index to the registry from which
+  the value is accessible:
+
+    ~~~
+    int r = luaL_reg(L, LUA_REGISTRYINDEX);
+    ~~~
+
+- These keys are called *references*
+- To get the value of a reference, a call like this
+  can be used:
+
+    ~~~
+    lua_rawgeti(L, LUA_REGISTRYINDEX, r);
+    ~~~
+
+- To delete a value off the registry, we call `luaL_unref`:
+
+    ~~~
+    luaL_unref(L, LUA_REGISTRYINDEX, r);
+    ~~~
+
+- Note that the registry is often accessed with
+  raw methods as it's not expected to have metamethods
+- The reference system also defines `LUA_NOREF`,
+  which stands for an invalid reference (akin to a
+  NULL-pointer)
+- Using the function `lua_pushlightuserdata` we
+  can push a Lua value representing a C pointer
+  to the stack
+- Lua 5.2 introduced some functions to simplify the
+  use of variable addresses as unique keys:
+    - `lua_rawgetp`
+    - `lua_rawsetp`
+
+- The *upvalue* mechanism implements an equivalent
+  of C static variables that are visible only
+  in a particular function
+- Every time you create a new C function in Lua
+  you can associate with it any number of upvalues
+- Upvalues are also accessed from the stack using
+  pseudo-indexes (just like the registry)
+- The association of a C function with its upvalues
+  is called a *closure*
+- The function `lua_pushcclosure` can be used to
+  create clojures from C functions
+- Before creating a closure, we must push on the
+  stack the initial values for its upvalues and
+  pass a number to `lua_pushcclosure` indicating
+  how many there are
+- The macro `lua_upvalueindex` is a macro which
+  produces the pseudo-index of an upvalue given
+  its number (numbered starting from 1)
+- When writing a module in C, we can make all
+  functions in it have the same table as single
+  upvalue and store module-specifid data in there
+
+
+User-Defined Types in C
+-----------------------
+
+- Lua can be extended with types written in C
+- Arbitrary C data can be stored in Lua *userdata*
+- When creating userdata, it's size can be specified:
+
+    ~~~
+    void *lua_newuserdata(lua_State *L, size_t size);
+    ~~~
+
+- Lua takes care of deallocating the memory when
+  it is no longer needed
+- No matter how you use a library, it should neither
+  corrupt C data not produce a core dump from Lua
+- This is why you need some way to identify your own
+  userdata
+- Userdata types can be identified by their metatable
+- It is customary in Lua to register any new C type
+  into the registry, using a type name as the index
+  and the metatable as the value
+
+    ~~~
+    int luaL_newmetatable(lua_State *L, const char *name);
+    void luaL_getmetatable(lua_State *L, const char *name);
+    void *luaL_checkudata(lua_State *L, int index, const char *name);
+    ~~~
+
+- Using the `__index` metamethod, types created in
+  C can behave as objects
+- As in Lua tables, array access can be provided via the
+  `__index` and `__newindex` metamethods
+- There is also another kind of userdata in Lua:
+  *light userdata*
+- Light userdata only represents a C pointer
+- It is a value, so when two light userdatas refer
+  to the same pointer, they are equal (this does not
+  apply to normal userdata since they are objects)
+- Light userdata are not managed by the garbage
+  collector
+- In addition, they do not have metatables
+
+
+Memory Management
+-----------------
+
+Lua allocates all its data structures dynamically. As
+such, it needs to make sure it does not use more memory
+than it really needs. It keeps a tight control over its
+memory use; when we close a Lua state, Lua explicitly
+frees all its memory. Additionally, it has a *garbage
+collector* running, which frees unused memory. This
+is convenient for most applications, some special
+applications, however, may require adaptations.
+
+### Memory Allocation
+- The Lua code does not assume anything about how to
+  allocate memory: it does all its memory allocation
+  and deallocation through one single *allocation
+  function*, which the user must provide when she
+  creates a new Lua state
+- This function by default uses the standard
+  `malloc`-`realloc`-`free` functions
+- It is easy to override this allocation function
+- Using `lua_getallocf`, you can get a pointer to
+  the allocation function in use by a state
+
+### The Garbage Collector
+- With version 5.1 Lua got an *incremental collector*,
+  which does not need to stop execution to perform
+  a garbage collection cycle
+- It works in three steps: *mark*, *clean* and *sweep*.
+- It has a C and a Lua interface with these two functions:
+
+    ~~~
+    int lua_gc(lua_State *L, int what, int data)
+    collectgarbage(what [, data])
+    ~~~
+
+- This API allows some aspects of the garbage collector
+  to be controlled
+
+    `LUA_GCSTOP`
+    :   stops the collector
+
+    `LUA_GCRESTART`
+    :   restarts the collector
+
+    `LUA_GCCOLLECT`
+    :   performs a complete garbage-collection cycle
+
+    `LUA_GCSTEP`
+    :   performs some garbage-collection work
+
+    `LUA_GCCOUNT`
+    :   returns the number of kilobytesof memory in use by Lua
+
+    `LUA_GCCOUNTB`
+    :   returns the fraction of the number of kilobytes memory in use
+
+    `LUA_GCSETPAUSE`
+    :   sets the collector's `pause` parameter in percentage points
+
+    `LUA_GCSTEPMUL`
+    :   sets the collector's step multiplier in percentage points
+
+- Any garbage collector trades memory for CPU time
+- The parameters `pause` and `stepmul` allow some control
+  over the collector's character
+- This allows customizing the garbage collector for the requirements
+
 
