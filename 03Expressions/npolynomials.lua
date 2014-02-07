@@ -10,17 +10,19 @@
 -- by x^n) and the last array member representing
 -- the last coefficient (multiplied by x)
 
--- calculates polynomials using 2n multiplications,
--- n additions and no exponentiations or something
--- along those lines
+-- calculates polynomials using at most n multiplications,
+-- n additions and no exponentiations
+
 function calculate(coefficients, x)
-    p = 0
-    cur = 1
-    for i = #coefficients, 1, -1 do
-        p = p + cur*coefficients[i]
-        cur = cur * x
+    if #coefficients == 0 then
+        return nil
+    elseif #coefficients == 1 then
+        return coefficients[1]
+    else
+        last = coefficients[#coefficients]
+        coefficients[#coefficients] = nil
+        return last + x * calculate(coefficients, x)
     end
-    return p
 end
 
 -- read coefficients from user
