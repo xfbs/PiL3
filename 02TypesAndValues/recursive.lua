@@ -37,8 +37,20 @@ a.a = 3
 print("a", a)
 print("a.a", a.a)
 
--- what is a.a.a.a now? nothing. we can't get
+-- what is a.a.a.a now? we can't get
 -- a value for it. now, a.a is 3, so a.a.a.a,
 -- interpreted as (a.a).a.a is equivalent to
--- 3.a.a, and 3.a is not a valid operation.
-print("a.a.a.a", "not defined")
+-- 3.a.a, and 3.a is not a valid operation,
+-- since number 3 is not a table, and you cannot
+-- lookup its key.
+-- You can test it on `lua -i`:
+-- [[
+; lua
+> a = {}; a.a =a
+> a.a.a.a = 3
+> = a.a.a.a
+stdin:1: attempt to index field 'a' (a number value)
+stack traceback:
+        stdin:1: in main chunk
+        [C]: in ?
+-- ]]
