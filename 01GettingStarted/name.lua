@@ -5,5 +5,4 @@
 
 -- the script name is always the first
 -- parameter in arg
-print("My name is: ")
-print(arg[0])
+print("My name is: " .. arg[0])
