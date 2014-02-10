@@ -5,12 +5,20 @@
 -- you do it? Consider issues like readability, maximum line
 -- length, and performance.
 
--- In such a case, I would use a long string literal. The
--- advantage here is that it doesn't need much escaping, but 
--- one can still enter arbitrary binary data. It can be as
--- long as necessary, it can span multiple lines and it
--- should be quite fast.
-data = [[
-fklshfs lkfhjsdfsdf sdklfshghsfglksdfh...
-]]
+-- Since it's a long sequence of arbitrary bytes, it may be
+-- very long. Considering maximum line length, it's a good
+-- idea to use `\z`.
+
+data = "\x00\x01\x02\x03\x04\x05\x06\x07\z
+        \x08\x09\x0A\x0B\x0C\x0D\x0E\x0F"
+
+-- If that arbitrary bytes is human readable, we don't need
+-- to escape it. And `\z` works all the same.
+
+objective_c_is_wonderful = "outputImageProviderFromBuffer\z
+                            WithPixelFormat:pixelsWide:\z
+                            pixelsHigh:baseAddress:\z
+                            bytesPerRow:releaseCallback:\z
+                            releaseContext:colorSpace:\z
+                            shouldColorMatch"
 
