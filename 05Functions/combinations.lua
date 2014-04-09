@@ -3,6 +3,76 @@
 -- Exercise 5.4: Write a function that receives an array and prints all
 -- combinations of the elements in the array.
 
+
+-- returns array in a format {{1,2}, {1,3} ...}
+-- every element in returned array is a table with one combination
+function combinations(arr, r)
+	-- do noting if r is bigger then length of arr
+	if(r > #arr) then
+		return {}
+	end
+
+	--for r = 0 there is only one possible solution and that is a combination of lenght 0
+	if(r == 0) then
+		return {}
+	end
+
+	if(r == 1) then
+		-- if r == 1 than retrn only table with single elements in table
+		-- e.g. {{1}, {2}, {3}, {4}}
+
+		local return_table = {}
+		for i=1,#arr do
+			table.insert(return_table, {arr[i]})
+		end
+
+		return return_table
+	else
+		-- else return table with multiple elements like this
+		-- e.g {{1, 2}, {1, 3}, {1, 4}}
+
+		local return_table = {}
+
+		--create new array without the first element
+		local arr_new = {}
+		for i=2,#arr do
+			table.insert(arr_new, arr[i])
+		end
+
+		--combinations of (arr-1, r-1)
+		for i, val in pairs(combinations(arr_new, r-1)) do
+			local curr_result = {}
+			table.insert(curr_result, arr[1]);
+			for j,curr_val in pairs(val) do
+				table.insert(curr_result, curr_val)
+			end
+			table.insert(return_table, curr_result)
+		end
+
+		--combinations of (arr-1, r)
+		for i, val in pairs(combinations(arr_new, r)) do
+			table.insert(return_table, val)
+		end
+
+		return return_table
+	end
+end
+
+function all_combinations(array)
+	for i=1, #array, 1 do
+		for i, val in pairs(combinations(array, i)) do
+			for j, combination in pairs(val) do
+				if(j==#val) then -- don't print , if last element
+					io.write(combination)
+				else
+					io.write(combination..",")
+				end
+			end
+			print()
+		end
+	end
+end
+
 print("enter array items, when done enter 'end'")
 array = {}
 repeat
@@ -10,23 +80,5 @@ repeat
     item = io.read()
 until item == "end"
 
-function print_combinations(first, ...)
-    -- turn the rest of the items into an array
-    local rest = {...}
-
-    -- if there are not at least 2 values, there
-    -- is nothing to do
-    if not first and not rest[1] then
-        return
-    end
-
-    -- print the combinations
-    for i, v in ipairs(rest) do
-        print(first .. ' and ' .. v)
-    end
-
-    -- print the combinations of the other values
-    return print_combinations(...)
-end
-
-print_combinations(table.unpack(array))
+print("All possible combinations:")
+all_combinations(array)
