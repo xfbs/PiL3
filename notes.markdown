@@ -618,7 +618,7 @@ Modules and Packages
 - To find Lua files, Lua uses a couple of *templates* defined
   in `package.paths`
 - The same applies the C libraries, but their paths are in
-  `packages.cpaths`
+  `package.cpaths`
 - Writing a module is simple: create a table with all the functions
   that should be exported in it and return it
 - We can use some `_ENV` tricks to automatically build the table
