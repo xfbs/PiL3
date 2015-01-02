@@ -6,69 +6,43 @@
 -- should become a new function, and each goto becomes
 -- a tail call.
 
--- room one function
-function room1()
-    local func
-    while true do
-        local move = io.read()
-        if move == "south" then
-            func = room3
-            break
-        elseif move == "east" then
-            func = room2
-            break
-        else
-            print("invalid move")
-            return
-        end
-    end
+-- This solution is given in Programming in Lua first edition
+-- http://www.lua.org/pil/6.3.html
 
-    return func()
+function room1 ()
+    local move = io.read()
+    if move == "south" then return room3()
+    elseif move == "east" then return room2()
+    else
+        print("invalid move")
+        return room1()   -- stay in the same room
+    end
 end
-
--- room two function
-function room2()
-    local func
-    while true do
-        local move = io.read()
-        if move == "south" then
-            func = room4
-            break
-        elseif move == "west" then
-            func = room1
-            break
-        else
-            print("invalid move")
-            return
-        end
-    end
     
-    return func()
-end
-
--- room three function
-function room3()
-    local func
-    while true do
-        local move = io.read()
-        if move == "north" then
-            func = room1
-            break
-        elseif move == "east" then
-            func = room4
-            break
-        else
-            print("invalid move")
-            return
-        end
+function room2 ()
+    local move = io.read()
+    if move == "south" then return room4()
+    elseif move == "west" then return room1()
+    else
+        print("invalid move")
+        return room2()
     end
-
-    return func()
 end
-
--- room four function
-function room4()
-    print("congratulations, you won!")
+    
+function room3 ()
+    local move = io.read()
+    if move == "north" then return room1()
+    elseif move == "east" then return room4()
+    else
+        print("invalid move")
+        return room3()
+    end
 end
+    
+function room4 ()
+    print("congratulations!")
+end
+    
+-- We start the game with a call to the initial room:
 
 room1()
