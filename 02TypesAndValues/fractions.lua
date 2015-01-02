@@ -6,7 +6,7 @@
 -- is a power of two? What about the number 5.5?
 
 -- Just like some numbers like one third (0.333...) cannot
--- be expressesed in the decimal system with a denominator
+-- be expressed in the decimal system with a denominator
 -- that is a denominator of ten, some numbers can't be
 -- represented in the binary system.
 
