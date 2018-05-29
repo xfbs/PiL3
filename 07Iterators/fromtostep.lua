@@ -23,7 +23,7 @@ function fromto(min, max, step)
 
     -- return iterator and crease the invariant
     -- state
-    return iter, {max=max, step=step}, min-1
+    return iter, {max=max, step=step}, min-step
 end
 
 -- test the iterator in a for loop
