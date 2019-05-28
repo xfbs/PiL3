@@ -31,7 +31,7 @@ function serialize(o, args)
     -- function to check if a string is a valid
     -- identifier
     local function is_identifier(id)
-        if string.match(id, "[a-zA-Z_][a-zA-Z0-9_]*") == id then
+        if string.match(id, "^[a-zA-Z_][a-zA-Z0-9_]*") == id then
             return true
         else
             return false
